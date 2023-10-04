@@ -14,7 +14,7 @@
 
     <groupId>ru.sergkorot.dynamic</groupId>
     <artifactId>operation-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>Dynamic search</name>
     <description>Library for dynamic searching into the databases</description>
