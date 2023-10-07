@@ -64,7 +64,7 @@ public final class SortUtils {
     }
 
     private static Sort.Order getOrder(String name) {
-        if (name.contains("-")) {
+        if (name.startsWith("-")) {
             return Sort.Order.desc(name.substring(1));
         } else {
             return Sort.Order.asc(name);

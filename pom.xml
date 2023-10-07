@@ -14,10 +14,10 @@
 
     <groupId>ru.sergkorot.dynamic</groupId>
     <artifactId>operation-core</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
-    <name>Dynamic search</name>
-    <description>Library for dynamic searching into the databases</description>
+    <name>Dynamic search core library</name>
+    <description>Core lib with interfaces for realization dynamic search</description>
     <url>https://github.com/serezakorotaev/operation-core</url>
 
     <developers>
