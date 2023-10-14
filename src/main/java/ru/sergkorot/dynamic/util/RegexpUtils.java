@@ -21,7 +21,7 @@ public final class RegexpUtils {
     /**
      * Regexp pattern corresponding to the example: "-id,name,-hello".
      */
-    public static final String REGEXP_VALIDATION_SORT_BY_VALUES = "^(-?[A-z]*\\,)*(-?[A-z]+)$";
+    public static final String REGEXP_VALIDATION_SORT_BY_VALUES = "^(-?[A-z-_]*,)*(-?[A-z-_]+)$";
 
     /**
      * transforming string by pattern to list strings with strings for further paging

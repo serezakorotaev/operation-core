@@ -14,7 +14,7 @@
 
     <groupId>ru.sergkorot.dynamic</groupId>
     <artifactId>operation-core</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <name>Dynamic search core library</name>
     <description>Core lib with interfaces for realization dynamic search</description>
@@ -94,6 +94,12 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
