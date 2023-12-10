@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertLinesMatch;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class RegexpUtilTest {
+class RegexpUtilTest {
 
     @Test
     void cutStringWithValuesToListWithValuesSuccess() {
@@ -50,5 +49,35 @@ public class RegexpUtilTest {
         String values = "-i%d^,name;Value,-hello*World";
 
         assertThrows(IllegalArgumentException.class, () -> RegexpUtils.transformToArrayFieldsNames(values));
+    }
+
+    @Test
+    void successOperationGrouping() {
+        var query = "OR(name.eq=Jhon)(name.eq=Mike)";
+        List<String> operationGroups = RegexpUtils.transformToArrayOperationGroups(query);
+
+        assertEquals(2, operationGroups.size());
+        assertTrue(operationGroups.contains("(name.eq=Jhon)"));
+    }
+
+    @Test
+    void failIncorrectQuery() {
+        var query = "ORsdfd";
+        assertThrows(IllegalArgumentException.class, () -> RegexpUtils.transformToArrayOperationGroups(query));
+    }
+
+    @Test
+    void failEmptyOperationGroups() {
+        var query = "OR()()";
+        assertThrows(IllegalArgumentException.class, () -> RegexpUtils.transformToArrayOperationGroups(query));
+    }
+
+    @Test
+    void succesWhenAtLeastOneOperationGroupExists() {
+        var query = "OR()(name.eq=Mike)";
+        List<String> operationGroups = RegexpUtils.transformToArrayOperationGroups(query);
+
+        assertEquals(1, operationGroups.size());
+        assertTrue(operationGroups.contains("(name.eq=Mike)"));
     }
 }

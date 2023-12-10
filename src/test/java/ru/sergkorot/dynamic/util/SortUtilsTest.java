@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SortUtilsTest {
+class SortUtilsTest {
 
     @Test
     void makeSortOrdersWithValidNameSuccess() {
@@ -19,8 +19,8 @@ public class SortUtilsTest {
 
         orders.forEach(order -> {
             switch (order.getProperty()) {
-               case "id", "hello" -> assertEquals(order.getDirection(), Sort.Direction.DESC);
-               case "name" -> assertEquals(order.getDirection(), Sort.Direction.ASC);
+               case "id", "hello" -> assertEquals(Sort.Direction.DESC, order.getDirection());
+               case "name" -> assertEquals(Sort.Direction.ASC, order.getDirection());
             }
         });
     }
