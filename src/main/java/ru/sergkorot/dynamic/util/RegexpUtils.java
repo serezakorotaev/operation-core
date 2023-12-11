@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Sergey Korotaev
- * Util is used for transforming string by pattern to list strings with strings for further paging
+ * Util is used for transforming string by patterns
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RegexpUtils {
@@ -22,6 +22,13 @@ public final class RegexpUtils {
      */
     @SuppressWarnings({"S5857"})
     public static final Pattern OPERATION_GROUPING_PATTERN = Pattern.compile("\\([^()].+?\\)");
+
+    /**
+     * Regexp pattern to find string with searchParam structure (name.like=lalal)
+     *
+     * @see ru.sergkorot.dynamic.model.BaseSearchParam
+     */
+    public static final Pattern SEARCH_PARAM_PATTERN = Pattern.compile("\\w+\\.\\w+=(?:\"[^\"]*\"|\\w+)");
     /**
      * Regexp pattern to remove all spaces
      */
@@ -52,21 +59,43 @@ public final class RegexpUtils {
         return fieldsNamesWithoutWhiteSpace;
     }
 
+    /**
+     * Transforming query by pattern to list with query groups
+     *
+     * @param query - query for request to database
+     * @return List of String with request groups
+     */
     public static List<String> transformToArrayOperationGroups(final String query) {
+        return transformToArrayByPattern(query, OPERATION_GROUPING_PATTERN);
+    }
 
-        List<String> operationGroups = new ArrayList<>();
+    /**
+     * Transforming query by pattern to list of string with searchParam structure
+     *
+     * @param query String with request group
+     * @return list of string with searchParam structure
+     * @see ru.sergkorot.dynamic.model.BaseSearchParam
+     */
+    public static List<String> transformToArraySearchParams(String query) {
+        return transformToArrayByPattern(query, SEARCH_PARAM_PATTERN);
+    }
 
-        Matcher matcher = OPERATION_GROUPING_PATTERN.matcher(query);
+
+    private static List<String> transformToArrayByPattern(String query, Pattern pattern) {
+
+        List<String> params = new ArrayList<>();
+
+        Matcher matcher = pattern.matcher(query);
 
         while (matcher.find()) {
-            String group = matcher.group();
-            operationGroups.add(group);
+            String param = matcher.group();
+            params.add(param);
         }
 
-        if (CollectionUtils.isEmpty(operationGroups)) {
-            throw new IllegalArgumentException(String.format("query - [%s] doesn't contains correct string for request", query));
+        if (CollectionUtils.isEmpty(params)) {
+            throw new IllegalArgumentException(String.format("query - [%s] doesn't contain correct string for building request", query));
         }
 
-        return operationGroups;
+        return params;
     }
 }
