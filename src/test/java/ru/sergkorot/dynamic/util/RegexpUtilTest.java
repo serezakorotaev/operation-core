@@ -73,11 +73,32 @@ class RegexpUtilTest {
     }
 
     @Test
-    void succesWhenAtLeastOneOperationGroupExists() {
+    void successWhenAtLeastOneOperationGroupExists() {
         var query = "OR()(name.eq=Mike)";
         List<String> operationGroups = RegexpUtils.transformToArrayOperationGroups(query);
 
         assertEquals(1, operationGroups.size());
         assertTrue(operationGroups.contains("(name.eq=Mike)"));
+    }
+
+    @Test
+    void successBuildingSearchParamsList() {
+        var query = "(OR name.like=\"Marvin mdsf!\" surname.eq=Valov)";
+        List<String> searchParams = RegexpUtils.transformToArraySearchParams(query);
+
+        assertEquals(2, searchParams.size());
+        assertTrue(searchParams.contains("name.like=\"Marvin mdsf!\""));
+    }
+
+    @Test
+    void failEmptySearchParamsList() {
+        var query = "(OR )";
+        assertThrows(IllegalArgumentException.class, () -> RegexpUtils.transformToArraySearchParams(query));
+    }
+
+    @Test
+    void failInvalidSearchParamsQuery() {
+        var query = "(OR someName)";
+        assertThrows(IllegalArgumentException.class, () -> RegexpUtils.transformToArraySearchParams(query));
     }
 }
