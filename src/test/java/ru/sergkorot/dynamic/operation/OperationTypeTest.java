@@ -5,7 +5,7 @@ import ru.sergkorot.dynamic.model.enums.OperationType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OperationTypeTest {
+class OperationTypeTest {
 
     @Test
     void inOperationTypeTest() {

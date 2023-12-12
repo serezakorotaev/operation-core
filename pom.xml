@@ -14,7 +14,7 @@
 
     <groupId>ru.sergkorot.dynamic</groupId>
     <artifactId>operation-core</artifactId>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
 
     <name>Dynamic search core library</name>
     <description>Core lib with interfaces for realization dynamic search</description>
