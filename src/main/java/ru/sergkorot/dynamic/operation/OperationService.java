@@ -2,8 +2,9 @@ package ru.sergkorot.dynamic.operation;
 
 import ru.sergkorot.dynamic.model.BaseSearchParam;
 import ru.sergkorot.dynamic.model.ComplexSearchParam;
-import ru.sergkorot.dynamic.model.enums.GlueOperation;
 import ru.sergkorot.dynamic.model.enums.OperationType;
+import ru.sergkorot.dynamic.model.enums.GlueOperation;
+import ru.sergkorot.dynamic.glue.GlueOperationService;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @param <T> - interface for data access (for example, Specification)
  */
 @SuppressWarnings("unused")
-public interface OperationService<T> {
+public interface OperationService<T> extends GlueOperationService<T> {
 
     /**
      * Method for building request with base request parameters
