@@ -2,7 +2,6 @@ package ru.sergkorot.dynamic.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,7 +91,7 @@ public final class RegexpUtils {
             params.add(param);
         }
 
-        if (CollectionUtils.isEmpty(params)) {
+        if (!params.isEmpty()) {
             throw new IllegalArgumentException(String.format("query - [%s] doesn't contain correct string for building request", query));
         }
 

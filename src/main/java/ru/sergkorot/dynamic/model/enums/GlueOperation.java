@@ -2,67 +2,23 @@ package ru.sergkorot.dynamic.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.mongodb.core.query.Criteria;
+import ru.sergkorot.dynamic.glue.Glue;
+import ru.sergkorot.dynamic.glue.GlueOperationProvider;
 
-import java.util.List;
+import java.util.function.Function;
 
-/**
- * @author Sergey Korotaev
- * Enum for And/or glue operation
- */
 @Getter
 @AllArgsConstructor
 public enum GlueOperation {
 
-    /**
-     * And gluing for operation
-     */
-    AND {
-        @Override
-        public <T> Specification<T> glueSpecOperation(Specification<T> first, Specification<T> second) {
-            return first.and(second);
-        }
+    AND(GlueOperationProvider::and),
+    OR(GlueOperationProvider::or);
 
-        @Override
-        public Criteria glueCriteriaOperation(List<Criteria> criteriaList) {
-            return new Criteria().andOperator(criteriaList);
-        }
+    private final Function<GlueOperationProvider<?>, Glue<?>> glueFunction;
 
-    },
+    @SuppressWarnings("unchecked")
+    public <G> Glue<G> getGlue(GlueOperationProvider<G> glueOperationProvider) {
+        return (Glue<G>) glueFunction.apply(glueOperationProvider);
+    }
 
-    /**
-     * Or gluing for operation
-     */
-    OR {
-        @Override
-        public <T> Specification<T> glueSpecOperation(Specification<T> first, Specification<T> second) {
-            return first.or(second);
-        }
-
-        @Override
-        public Criteria glueCriteriaOperation(List<Criteria> criteriaList) {
-            return new Criteria().orOperator(criteriaList);
-        }
-
-    };
-
-    /**
-     * Method for gluing two specification with each other
-     *
-     * @param <T>    - entity for which building condition
-     * @param first  - first specification for gluing
-     * @param second - second specification for gluing
-     * @return - specification constructed from two other
-     */
-    public abstract <T> Specification<T> glueSpecOperation(Specification<T> first, Specification<T> second);
-
-
-    /**
-     * Method for gluing criteria with criteria list by condition
-     *
-     * @param criteriaList - list with criteria parameters
-     * @return - criteria constructed from others
-     */
-    public abstract Criteria glueCriteriaOperation(List<Criteria> criteriaList);
 }

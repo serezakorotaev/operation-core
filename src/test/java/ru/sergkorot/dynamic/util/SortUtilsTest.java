@@ -1,11 +1,11 @@
 package ru.sergkorot.dynamic.util;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SortUtilsTest {
@@ -19,8 +19,8 @@ class SortUtilsTest {
 
         orders.forEach(order -> {
             switch (order.getProperty()) {
-               case "id", "hello" -> assertEquals(Sort.Direction.DESC, order.getDirection());
-               case "name" -> assertEquals(Sort.Direction.ASC, order.getDirection());
+               case "id", "hello" -> Assertions.assertEquals(Sort.Direction.DESC, order.getDirection());
+               case "name" -> Assertions.assertEquals(Sort.Direction.ASC, order.getDirection());
             }
         });
     }

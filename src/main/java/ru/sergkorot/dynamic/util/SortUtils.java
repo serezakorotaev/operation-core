@@ -7,7 +7,6 @@ import org.springframework.data.domain.Sort;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Sergey Korotaev
@@ -60,7 +59,7 @@ public final class SortUtils {
         return splitSortValues.stream()
                 .map(name -> checkName(validNames, name))
                 .map(SortUtils::getOrder)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static Sort.Order getOrder(String name) {

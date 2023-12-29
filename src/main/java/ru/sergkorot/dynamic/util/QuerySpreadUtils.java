@@ -4,8 +4,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import ru.sergkorot.dynamic.model.BaseSearchParam;
 import ru.sergkorot.dynamic.model.ComplexSearchParam;
-import ru.sergkorot.dynamic.model.enums.GlueOperation;
 import ru.sergkorot.dynamic.model.shell.MultipleOperationShell;
+import ru.sergkorot.dynamic.model.enums.GlueOperation;
 
 import java.util.List;
 
