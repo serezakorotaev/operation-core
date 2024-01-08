@@ -50,6 +50,9 @@
         <plugin.maven.javadoc.ver>3.5.0</plugin.maven.javadoc.ver>
         <plugin.maven.gpg.ver>3.0.1</plugin.maven.gpg.ver>
         <lombok.version>1.18.30</lombok.version>
+        <common.lang3.version>3.12.0</common.lang3.version>
+        <spring.data.common.version>3.1.4</spring.data.common.version>
+        <jupiter.version>5.9.3</jupiter.version>
     </properties>
 
     <dependencies>
@@ -63,7 +66,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>${common.lang3.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
@@ -78,12 +81,12 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
-            <version>3.1.4</version>
+            <version>${spring.data.common.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.3</version>
+            <version>${jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -103,7 +106,6 @@
                     </annotationProcessorPaths>
                     <source>17</source>
                     <target>17</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
