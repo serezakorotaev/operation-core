@@ -4,17 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
-        <relativePath/>
-    </parent>
-
     <groupId>ru.sergkorot.dynamic</groupId>
     <artifactId>operation-core</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 
     <name>Dynamic search core library</name>
     <description>Core lib with interfaces for realization dynamic search</description>
@@ -57,24 +49,24 @@
         <plugin.maven.source.ver>3.2.1</plugin.maven.source.ver>
         <plugin.maven.javadoc.ver>3.5.0</plugin.maven.javadoc.ver>
         <plugin.maven.gpg.ver>3.0.1</plugin.maven.gpg.ver>
+        <lombok.version>1.18.30</lombok.version>
+        <common.lang3.version>3.12.0</common.lang3.version>
+        <spring.data.common.version>3.1.4</spring.data.common.version>
+        <jupiter.version>5.9.3</jupiter.version>
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>2.2</version>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>${common.lang3.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
@@ -86,19 +78,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>${spring.data.common.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
+            <version>${jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -118,7 +106,6 @@
                     </annotationProcessorPaths>
                     <source>17</source>
                     <target>17</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
