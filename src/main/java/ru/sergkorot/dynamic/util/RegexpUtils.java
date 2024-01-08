@@ -91,7 +91,7 @@ public final class RegexpUtils {
             params.add(param);
         }
 
-        if (!params.isEmpty()) {
+        if (params.isEmpty()) {
             throw new IllegalArgumentException(String.format("query - [%s] doesn't contain correct string for building request", query));
         }
 
