@@ -43,6 +43,7 @@ From maven central <br>
 
 [Other useful classes](#6-other-useful-classes)
 - [Utils](#utils)
+- [QuerySpreadUtils](#queryspreadutils)
 - [RegexpUtils](#regexputils)
 - [SortUtils](#sortutils)
 
@@ -402,7 +403,21 @@ find all where (name.equals("Rhett14") and version in(0, 2)) or (name.equals("Re
 
 ### [Utils](#content-list)
 
+#### [`QuerySpreadUtils`](#content-list)
+
+- `QuerySpreadUtils.transformToOperationShell(String query)`
+
+Util is used for transforming query from string to MultipleOperationShell class for future request into db
+
+  ```
+    Example:
+    AND(OR name.like=Marvin surname.eq=Valov)(OR name.like=Tony surname.eq=Stark) ->
+    
+    find all where (name like Marvin or surname equals Valov) And (name like Tony or surname equals Stark)
+  ```
+
 #### [`RegexpUtils`](#content-list)
+
 - `RegexpUtils.transformToArrayFieldsNames(String fieldsNames)`
 
 Util is used for transforming string by pattern to list strings with strings for further paging
@@ -411,6 +426,26 @@ Util is used for transforming string by pattern to list strings with strings for
   Example:
   name,-surname,version -> ["name", "-surname", "version]
   
+  ```
+
+- `RegexpUtils.transformToArrayOperationGroups(String query)`
+
+Util is used for transforming query by pattern to list with query groups
+  
+  ```
+    Exmaple:
+    OR(name.eq=Jhon)(name.eq=Mike) -> ["(name.eq=Jhon)", "(name.eq=Mike)"]
+    
+  ```
+
+- `RegexpUtils.transformToArraySearchParams(String query)`
+
+Util is used for transforming query by pattern to list of string with searchParam structure
+
+  ```
+    Exmaple:
+    (OR name.like="Marvin mdsf!" surname.eq=Valov) -> ["name.like="Marvin mdsf!"", "surname.eq=Valov"]
+    
   ```
 
 #### [`SortUtils`](#content-list)
